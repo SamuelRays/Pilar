@@ -12,8 +12,8 @@ class CountryField implements Field {
     private int price;
     private int cityPrice;
     private int visitCostPerCity;
-    private int cityAmount;
-    private int wonderAmount;
+    private int cityAmount = 0;
+    private int wonderAmount = 0;
     private Player player;
 
     public CountryField(Country country) {
