@@ -1,4 +1,4 @@
-package com;
+package com.field;
 
 public enum FieldType {
     COUNTRY,

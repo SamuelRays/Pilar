@@ -1,4 +1,4 @@
-package com;
+package com.field;
 
 import com.bonus.*;
 
