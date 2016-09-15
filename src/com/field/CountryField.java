@@ -1,5 +1,6 @@
 package com.field;
 
+import com.Player;
 import com.bonus.Bonus;
 
 import java.util.Set;
@@ -12,4 +13,5 @@ public class CountryField implements Field {
     private int visitCostPerCity;
     private int cityAmount;
     private int wonderAmount;
+    private Player player;
 }
