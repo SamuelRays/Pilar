@@ -1,7 +1,14 @@
 package com;
 
-/**
- * Created by nadareishvili on 15.09.2016.
- */
 public enum Union {
+    SOUTH_EUROPE,
+    NORTH_AMERICA,
+    EAST_ASIA,
+    SOUTH_AMERICA,
+    MIDDLE_EUROPE,
+    WEST_EUROPE,
+    NORTH_EUROPE,
+    WEST_ASIA,
+    SMALL,
+    THREE_NATIONS_CUP;
 }
