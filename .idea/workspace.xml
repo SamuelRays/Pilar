@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c564206f-cdae-47a8-a96f-9ca550571f03" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/field/CityField.java" afterPath="$PROJECT_DIR$/src/com/field/CityField.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/field/Country.java" afterPath="$PROJECT_DIR$/src/com/field/Country.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/field/CountryField.java" afterPath="$PROJECT_DIR$/src/com/field/CountryField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/field/FieldFactory.java" afterPath="$PROJECT_DIR$/src/com/field/FieldFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/field/MoneyField.java" afterPath="$PROJECT_DIR$/src/com/field/MoneyField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/field/PercentField.java" afterPath="$PROJECT_DIR$/src/com/field/PercentField.java" />
     </list>
     <ignored path="Pilar.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,12 +28,29 @@
       <file leaf-file-name="CountryField.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/field/CountryField.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53212523">
-              <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.6721582">
+              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#422#423#0" expanded="true" />
-                <element signature="e#460#461#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Country.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/field/Country.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="43" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
+              <folding>
+                <element signature="e#2182#2183#0" expanded="true" />
+                <element signature="e#2209#2210#0" expanded="true" />
+                <element signature="e#2238#2239#0" expanded="true" />
+                <element signature="e#2266#2267#0" expanded="true" />
+                <element signature="e#2299#2300#0" expanded="true" />
+                <element signature="e#2331#2332#0" expanded="true" />
+                <element signature="e#2371#2372#0" expanded="true" />
+                <element signature="e#2410#2411#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,16 +81,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Field.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/field/Field.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -172,12 +176,13 @@
         <option value="$PROJECT_DIR$/src/com/Union.java" />
         <option value="$PROJECT_DIR$/src/com/CountryField.java" />
         <option value="$PROJECT_DIR$/src/com/Player.java" />
-        <option value="$PROJECT_DIR$/src/com/field/CountryField.java" />
         <option value="$PROJECT_DIR$/src/com/field/CityField.java" />
         <option value="$PROJECT_DIR$/src/com/field/PortField.java" />
         <option value="$PROJECT_DIR$/src/com/field/PercentField.java" />
         <option value="$PROJECT_DIR$/src/com/field/MoneyField.java" />
         <option value="$PROJECT_DIR$/src/com/field/FieldFactory.java" />
+        <option value="$PROJECT_DIR$/src/com/field/Country.java" />
+        <option value="$PROJECT_DIR$/src/com/field/CountryField.java" />
       </list>
     </option>
   </component>
@@ -678,14 +683,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/field/Country.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="39" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/field/Field.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -758,14 +755,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/field/Country.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="43" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
+          <folding>
+            <element signature="e#2182#2183#0" expanded="true" />
+            <element signature="e#2209#2210#0" expanded="true" />
+            <element signature="e#2238#2239#0" expanded="true" />
+            <element signature="e#2266#2267#0" expanded="true" />
+            <element signature="e#2299#2300#0" expanded="true" />
+            <element signature="e#2331#2332#0" expanded="true" />
+            <element signature="e#2371#2372#0" expanded="true" />
+            <element signature="e#2410#2411#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/field/CountryField.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53212523">
-          <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.6721582">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#422#423#0" expanded="true" />
-            <element signature="e#460#461#0" expanded="true" />
           </folding>
         </state>
       </provider>

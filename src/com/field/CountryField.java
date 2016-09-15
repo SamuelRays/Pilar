@@ -18,5 +18,9 @@ class CountryField implements Field {
 
     public CountryField(Country country) {
         this.country = country;
+        name = country.getName();
+        price = country.getPrice();
+        cityPrice = country.getCityPrice();
+        visitCostPerCity = country.getVisitCostPerCity();
     }
 }
