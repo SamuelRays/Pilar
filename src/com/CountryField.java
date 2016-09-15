@@ -1,7 +1,6 @@
 package com;
 
-/**
- * Created by nadareishvili on 15.09.2016.
- */
-public class CountryField {
+public class CountryField implements Field {
+    private Country country;
+
 }

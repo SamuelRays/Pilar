@@ -1,7 +1,4 @@
 package com.bonus;
 
-/**
- * Created by nadareishvili on 15.09.2016.
- */
-public class PaymentBonus {
+public class PaymentBonus implements Bonus {
 }

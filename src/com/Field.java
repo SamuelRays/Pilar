@@ -1,4 +1,4 @@
 package com;
 
-public class Field {
+public interface Field {
 }
