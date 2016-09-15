@@ -1,7 +1,5 @@
 package com.field;
 
-import com.Country;
-import com.Field;
 import com.bonus.Bonus;
 
 import java.util.Set;
