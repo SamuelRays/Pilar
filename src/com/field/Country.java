@@ -47,6 +47,10 @@ public enum Country {
         this.visitCostPerCity = price / 10;
     }
 
+    public Union getUnion() {
+        return union;
+    }
+
     public String getName() {
         return name;
     }

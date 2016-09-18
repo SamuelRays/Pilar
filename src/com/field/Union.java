@@ -30,4 +30,8 @@ public enum Union {
     public Class getBonus() {
         return bonus;
     }
+
+    public Set<Country> getCountries() {
+        return countries;
+    }
 }
