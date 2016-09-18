@@ -11,7 +11,7 @@ public class Player {
     private String name;
     private Set<Bonus> bonuses;
     private Field currentField;
-    private int money;
+    private long money;
     private Set<Field> countries;
 
     public Player(String name) {
@@ -25,11 +25,11 @@ public class Player {
         checkUnion(field);
     }
 
-    public int getMoney() {
+    public long getMoney() {
         return money;
     }
 
-    public void spendMoney(int amount) {
+    public void spendMoney(long amount) {
         money -= amount;
     }
 
