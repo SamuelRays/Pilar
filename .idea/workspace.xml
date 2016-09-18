@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c564206f-cdae-47a8-a96f-9ca550571f03" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bonus/PaymentBonus.java" afterPath="$PROJECT_DIR$/src/com/bonus/PaymentBonus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bonus/FastBuildBonus.java" afterPath="$PROJECT_DIR$/src/com/bonus/FastBuildBonus.java" />
     </list>
     <ignored path="Pilar.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -133,12 +133,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PaymentBonus.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PaymentBonus.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bonus/PaymentBonus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.28271028">
-              <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
               <folding>
+                <element signature="e#233#234#0" expanded="true" />
                 <element signature="e#261#262#0" expanded="true" />
               </folding>
             </state>
@@ -157,12 +158,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FastBuildBonus.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FastBuildBonus.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bonus/FastBuildBonus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-              <folding />
+            <state vertical-scroll-proportion="1.0537384">
+              <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+              <folding>
+                <element signature="e#141#142#0" expanded="true" />
+                <element signature="e#178#179#0" expanded="true" />
+                <element signature="e#210#211#0" expanded="true" />
+                <element signature="e#241#242#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -220,7 +226,6 @@
         <option value="$PROJECT_DIR$/src/com/bonus/MoneyBonus.java" />
         <option value="$PROJECT_DIR$/src/com/bonus/MoreThrowsBonus.java" />
         <option value="$PROJECT_DIR$/src/com/bonus/MoveChanceBonus.java" />
-        <option value="$PROJECT_DIR$/src/com/bonus/FastBuildBonus.java" />
         <option value="$PROJECT_DIR$/src/com/Union.java" />
         <option value="$PROJECT_DIR$/src/com/CountryField.java" />
         <option value="$PROJECT_DIR$/src/com/field/FieldFactory.java" />
@@ -237,6 +242,7 @@
         <option value="$PROJECT_DIR$/src/com/bonus/CityBonus.java" />
         <option value="$PROJECT_DIR$/src/com/bonus/Bonus.java" />
         <option value="$PROJECT_DIR$/src/com/bonus/PaymentBonus.java" />
+        <option value="$PROJECT_DIR$/src/com/bonus/FastBuildBonus.java" />
       </list>
     </option>
   </component>
@@ -875,14 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bonus/FastBuildBonus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bonus/MoneyBonus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -987,16 +985,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/field/Union.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bonus/FreeCityBonus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1026,12 +1014,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/field/Union.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bonus/PaymentBonus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28271028">
-          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
           <folding>
+            <element signature="e#233#234#0" expanded="true" />
             <element signature="e#261#262#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bonus/FastBuildBonus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0537384">
+          <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+          <folding>
+            <element signature="e#141#142#0" expanded="true" />
+            <element signature="e#178#179#0" expanded="true" />
+            <element signature="e#210#211#0" expanded="true" />
+            <element signature="e#241#242#0" expanded="true" />
           </folding>
         </state>
       </provider>
