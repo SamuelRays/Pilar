@@ -1,28 +1,13 @@
 package com.bonus;
 
-import com.Game;
-import com.Player;
-
-public class CityBonus implements Bonus {
-    private int level = 0;
+public class CityBonus extends Bonus {
     private int min = -1;
     private int max = 1;
-    private Player player;
 
     @Override
     public void increaseLevel() {
-        if (level < 9) {
-            int price = Game.bonusPrices.get(level + 1);
-            if (player.getMoney() >= price) {
-                level++;
-                player.spendMoney(price);
-                setMinMax();
-            } else {
-                //TODO
-            }
-        } else {
-            //TODO
-        }
+        super.increaseLevel();
+        setMinMax();
     }
 
     public int getLevel() {
@@ -35,15 +20,6 @@ public class CityBonus implements Bonus {
 
     public int getMax() {
         return max;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    @Override
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     private void setMinMax() {
