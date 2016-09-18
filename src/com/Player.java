@@ -25,11 +25,21 @@ public class Player {
         checkUnion(field);
     }
 
+    public int getMoney() {
+        return money;
+    }
+
+    public void spendMoney(int amount) {
+        money -= amount;
+    }
+
     private void checkUnion(CountryField field) {
         Union union = field.getCountry().getUnion();
         if (countries.containsAll(union.getCountries())) {
             try {
-                bonuses.add((Bonus) union.getBonus().newInstance());
+                Bonus bonus = (Bonus) union.getBonus().newInstance();
+                bonuses.add(bonus);
+                bonus.setPlayer(this);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
