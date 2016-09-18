@@ -1,4 +1,4 @@
 package com.field;
 
-class PortField implements Field {
+public class PortField implements Field {
 }

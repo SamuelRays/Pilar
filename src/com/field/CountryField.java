@@ -5,7 +5,7 @@ import com.bonus.Bonus;
 
 import java.util.Set;
 
-class CountryField implements Field {
+public class CountryField implements Field {
     private String name;
     private Country country;
     private Set<Bonus> bonuses;

@@ -1,6 +1,6 @@
 package com.field;
 
-class PercentField implements Field {
+public class PercentField implements Field {
     private String name;
     private float ratio;
 

@@ -1,6 +1,6 @@
 package com.field;
 
-class CityField implements Field {
+public class CityField implements Field {
     private String name;
     private int amount;
 
