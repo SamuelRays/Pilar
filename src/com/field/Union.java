@@ -2,6 +2,7 @@ package com.field;
 
 import com.bonus.*;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,9 +23,7 @@ public enum Union {
 
     Union(Class bonus, Country... countries) {
         this.bonus = bonus;
-        for (Country i : countries) {
-            this.countries.add(i);
-        }
+        Collections.addAll(this.countries, countries);
     }
 
     public Class getBonus() {
