@@ -1,6 +1,6 @@
 package com.field;
 
-public enum Country {
+public enum CountryFieldType implements FieldType {
     FRANCE(Union.SOUTH_EUROPE,"France", 10000, 1700),
     SPAIN(Union.SOUTH_EUROPE, "Spain", 10000, 1700),
     ITALY(Union.SOUTH_EUROPE, "Italy", 10000, 1700),
@@ -39,7 +39,7 @@ public enum Country {
     private int cityPrice;
     private int visitCostPerCity;
 
-    Country(Union union, String name, int price, int cityPrice) {
+    CountryFieldType(Union union, String name, int price, int cityPrice) {
         this.union = union;
         this.name = name;
         this.price = price;

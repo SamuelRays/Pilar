@@ -7,21 +7,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 public enum Union {
-    SOUTH_EUROPE(CityBonus.class, Country.FRANCE, Country.SPAIN, Country.ITALY),
-    NORTH_AMERICA(FreeCityBonus.class, Country.USA, Country.CANADA),
-    EAST_ASIA(PaymentBonus.class, Country.INDIA, Country.CHINA, Country.JAPAN),
-    SOUTH_AMERICA(FastBuildBonus.class, Country.BRAZIL, Country.ARGENTINA, Country.COLUMBIA, Country.VENEZUELA),
-    MIDDLE_EUROPE(MoveChanceBonus.class, Country.GERMANY, Country.AUSTRIA, Country.GREAT_BRITAIN),
-    WEST_EUROPE(MoreThrowsBonus.class, Country.NETHERLANDS, Country.DENMARK, Country.BELGIUM),
-    NORTH_EUROPE(MoneyBonus.class, Country.NORWAY, Country.SWEDEN, Country.FINLAND),
-    WEST_ASIA(WonderBonus.class, Country.UAE, Country.KUWAIT, Country.QATAR),
-    SMALL(PercentBonus.class, Country.LUXEMBOURG, Country.VATICAN, Country.SINGAPORE, Country.MONACO),
-    THREE_NATIONS_CUP(OneCountryBonus.class, Country.AUSTRALIA, Country.NEW_ZEALAND, Country.SOUTH_AFRICA);
+    SOUTH_EUROPE(CityBonus.class, CountryFieldType.FRANCE, CountryFieldType.SPAIN, CountryFieldType.ITALY),
+    NORTH_AMERICA(FreeCityBonus.class, CountryFieldType.USA, CountryFieldType.CANADA),
+    EAST_ASIA(PaymentBonus.class, CountryFieldType.INDIA, CountryFieldType.CHINA, CountryFieldType.JAPAN),
+    SOUTH_AMERICA(FastBuildBonus.class, CountryFieldType.BRAZIL, CountryFieldType.ARGENTINA, CountryFieldType.COLUMBIA, CountryFieldType.VENEZUELA),
+    MIDDLE_EUROPE(MoveChanceBonus.class, CountryFieldType.GERMANY, CountryFieldType.AUSTRIA, CountryFieldType.GREAT_BRITAIN),
+    WEST_EUROPE(MoreThrowsBonus.class, CountryFieldType.NETHERLANDS, CountryFieldType.DENMARK, CountryFieldType.BELGIUM),
+    NORTH_EUROPE(MoneyBonus.class, CountryFieldType.NORWAY, CountryFieldType.SWEDEN, CountryFieldType.FINLAND),
+    WEST_ASIA(WonderBonus.class, CountryFieldType.UAE, CountryFieldType.KUWAIT, CountryFieldType.QATAR),
+    SMALL(PercentBonus.class, CountryFieldType.LUXEMBOURG, CountryFieldType.VATICAN, CountryFieldType.SINGAPORE, CountryFieldType.MONACO),
+    THREE_NATIONS_CUP(OneCountryBonus.class, CountryFieldType.AUSTRALIA, CountryFieldType.NEW_ZEALAND, CountryFieldType.SOUTH_AFRICA);
 
     private Class bonus;
-    private Set<Country> countries = new HashSet<>();
+    private Set<CountryFieldType> countries = new HashSet<>();
 
-    Union(Class bonus, Country... countries) {
+    Union(Class bonus, CountryFieldType... countries) {
         this.bonus = bonus;
         Collections.addAll(this.countries, countries);
     }
@@ -30,7 +30,7 @@ public enum Union {
         return bonus;
     }
 
-    public Set<Country> getCountries() {
+    public Set<CountryFieldType> getCountries() {
         return countries;
     }
 }

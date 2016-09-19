@@ -4,7 +4,7 @@ import com.Player;
 
 public class CountryField implements Field {
     private String name;
-    private Country country;
+    private CountryFieldType countryFieldType;
     private int price;
     private int cityPrice;
     private int visitCostPerCity;
@@ -12,12 +12,12 @@ public class CountryField implements Field {
     private int wonderAmount = 0;
     private Player player;
 
-    public CountryField(Country country) {
-        this.country = country;
-        name = country.getName();
-        price = country.getPrice();
-        cityPrice = country.getCityPrice();
-        visitCostPerCity = country.getVisitCostPerCity();
+    public CountryField(CountryFieldType countryFieldType) {
+        this.countryFieldType = countryFieldType;
+        name = countryFieldType.getName();
+        price = countryFieldType.getPrice();
+        cityPrice = countryFieldType.getCityPrice();
+        visitCostPerCity = countryFieldType.getVisitCostPerCity();
     }
 
     public String getName() {
@@ -28,12 +28,12 @@ public class CountryField implements Field {
         this.name = name;
     }
 
-    public Country getCountry() {
-        return country;
+    public CountryFieldType getCountryFieldType() {
+        return countryFieldType;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setCountryFieldType(CountryFieldType countryFieldType) {
+        this.countryFieldType = countryFieldType;
     }
 
     public int getPrice() {

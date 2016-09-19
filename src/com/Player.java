@@ -40,7 +40,7 @@ public class Player {
     }
 
     public void addCountryField(CountryField field) {
-        money -= field.getCountry().getPrice();
+        money -= field.getCountryFieldType().getPrice();
         countries.add(field);
         field.setPlayer(this);
         checkUnion(field);
@@ -182,10 +182,6 @@ public class Player {
         return citiesForWonder1;
     }
 
-    public void setCitiesForWonder1(int citiesForWonder1) {
-        this.citiesForWonder1 = citiesForWonder1;
-    }
-
     public int getCitiesForWonder2() {
         return citiesForWonder2;
     }
@@ -259,7 +255,7 @@ public class Player {
     }
 
     private void checkUnion(CountryField field) {
-        Union union = field.getCountry().getUnion();
+        Union union = field.getCountryFieldType().getUnion();
         if (countries.containsAll(union.getCountries())) {
             try {
                 Bonus bonus = (Bonus) union.getBonus().newInstance();
