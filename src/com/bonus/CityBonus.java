@@ -10,40 +10,40 @@ public class CityBonus extends Bonus {
     private void setMinMax() {
         switch (level) {
             case 1:
-                player.setMinCityIncrease(3);
-                player.setMaxCityIncrease(7);
+                player.setNegativeCityIncrease(3);
+                player.setPositiveCityIncrease(7);
                 return;
             case 2:
-                player.setMinCityIncrease(5);
-                player.setMaxCityIncrease(10);
+                player.setNegativeCityIncrease(5);
+                player.setPositiveCityIncrease(10);
                 return;
             case 3:
-                player.setMinCityIncrease(7);
-                player.setMaxCityIncrease(13);
+                player.setNegativeCityIncrease(7);
+                player.setPositiveCityIncrease(13);
                 return;
             case 4:
-                player.setMinCityIncrease(10);
-                player.setMaxCityIncrease(18);
+                player.setNegativeCityIncrease(10);
+                player.setPositiveCityIncrease(18);
                 return;
             case 5:
-                player.setMinCityIncrease(15);
-                player.setMaxCityIncrease(25);
+                player.setNegativeCityIncrease(15);
+                player.setPositiveCityIncrease(25);
                 return;
             case 6:
-                player.setMinCityIncrease(20);
-                player.setMaxCityIncrease(35);
+                player.setNegativeCityIncrease(20);
+                player.setPositiveCityIncrease(35);
                 return;
             case 7:
-                player.setMinCityIncrease(35);
-                player.setMaxCityIncrease(60);
+                player.setNegativeCityIncrease(35);
+                player.setPositiveCityIncrease(60);
                 return;
             case 8:
-                player.setMinCityIncrease(60);
-                player.setMaxCityIncrease(100);
+                player.setNegativeCityIncrease(60);
+                player.setPositiveCityIncrease(100);
                 return;
             case 9:
-                player.setMinCityIncrease(120);
-                player.setMaxCityIncrease(200);
+                player.setNegativeCityIncrease(120);
+                player.setPositiveCityIncrease(200);
                 return;
         }
     }

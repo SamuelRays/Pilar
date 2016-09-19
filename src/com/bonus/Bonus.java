@@ -9,7 +9,7 @@ public abstract class Bonus {
 
     public void increaseLevel() {
         if (level < 9) {
-            long price = Game.bonusPrices.get(level + 1);
+            long price = Game.BONUS_PRICES.get(level + 1);
             if (player.getMoney() >= price) {
                 level++;
                 player.pay(price);

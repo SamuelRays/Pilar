@@ -13,27 +13,27 @@ public class Player {
     private Field currentField;
     private Set<Field> countries;
     private long money;
-    private int minCityIncrease = -1;
-    private int maxCityIncrease = 1;
-    private double firstCityPriceRatio = 1;
-    private double secondCityPriceRatio = 1;
-    private double thirdCityPriceRatio = 1;
-    private double paymentRatio = 1;
-    private int citiesPerTurnAvailable = 1;
-    private int availableThrows = 1;
-    private long salary = 5000;
-    private long forwardBonus = 5000;
-    private long tax = -5000;
-    private int citiesForWonder1 = 3;
-    private int citiesForWonder2 = 0;
-    private int citiesForWonder3 = 0;
-    private int citiesForWonder4 = 0;
-    private double minPercent = 0.9;
-    private double maxPercent = 1.1;
-    private int percentMoves = 3;
-    private double ultraPercent = 2;
-    private int ultraPercentMoves = 1;
-    private double oneCountryBonusRatio = 1.4;
+    private int negativeCityIncrease = Game.DEFAULT_NEGATIVE_CITY_INCREASE;
+    private int positiveCityIncrease = Game.DEFAULT_POSITIVE_CITY_INCREASE;
+    private double firstCityPriceRatio = Game.DEFAULT_FIRST_CITY_PRICE_RATIO;
+    private double secondCityPriceRatio = Game.DEFAULT_SECOND_CITY_PRICE_RATIO;
+    private double thirdCityPriceRatio = Game.DEFAULT_THIRD_CITY_PRICE_RATIO;
+    private double paymentRatio = Game.DEFAULT_PAYMENT_RATIO;
+    private int citiesPerTurnAvailable = Game.DEFAULT_CITIES_PER_TURN_AVAILABLE;
+    private int availableThrows = Game.DEFAULT_AVAILABLE_THROWS;
+    private long salary = Game.DEFAULT_SALARY;
+    private long forwardBonus = Game.DEFAULT_FORWARD_BONUS;
+    private long tax = -Game.DEFAULT_TAX;
+    private int citiesForWonder1 = Game.DEFAULT_CITIES_FOR_WONDER_1;
+    private int citiesForWonder2 = Game.DEFAULT_CITIES_FOR_WONDER_2;
+    private int citiesForWonder3 = Game.DEFAULT_CITIES_FOR_WONDER_3;
+    private int citiesForWonder4 = Game.DEFAULT_CITIES_FOR_WONDER_4;
+    private double negativePercent = Game.DEFAULT_NEGATIVE_PERCENT;
+    private double positivePercent = Game.DEFAULT_POSITIVE_PERCENT;
+    private int percentMoves = Game.DEFAULT_PERCENT_MOVES;
+    private double ultraPercent = Game.DEFAULT_ULTRA_PERCENT;
+    private int ultraPercentMoves = Game.DEFAULT_ULTRA_PERCENT_MOVES;
+    private double oneCountryBonusRatio = Game.DEFAULT_ONE_COUNTRY_BONUS_RATIO;
 
     public Player(String name) {
         this.name = name;
@@ -44,10 +44,6 @@ public class Player {
         countries.add(field);
         field.setPlayer(this);
         checkUnion(field);
-    }
-
-    public long getMoney() {
-        return money;
     }
 
     public void pay(long amount) {
@@ -86,24 +82,24 @@ public class Player {
         this.countries = countries;
     }
 
-    public void setMoney(long money) {
-        this.money = money;
+    public long getMoney() {
+        return money;
     }
 
-    public int setMinCityIncrease() {
-        return minCityIncrease;
+    public int getNegativeCityIncrease() {
+        return negativeCityIncrease;
     }
 
-    public void setMinCityIncrease(int minCityIncrease) {
-        this.minCityIncrease = minCityIncrease;
+    public void setNegativeCityIncrease(int negativeCityIncrease) {
+        this.negativeCityIncrease = negativeCityIncrease;
     }
 
-    public int getMaxCityIncrease() {
-        return maxCityIncrease;
+    public int getPositiveCityIncrease() {
+        return positiveCityIncrease;
     }
 
-    public void setMaxCityIncrease(int maxCityIncrease) {
-        this.maxCityIncrease = maxCityIncrease;
+    public void setPositiveCityIncrease(int positiveCityIncrease) {
+        this.positiveCityIncrease = positiveCityIncrease;
     }
 
     public double getFirstCityPriceRatio() {
@@ -206,20 +202,20 @@ public class Player {
         this.citiesForWonder4 = citiesForWonder4;
     }
 
-    public double getMinPercent() {
-        return minPercent;
+    public double getNegativePercent() {
+        return negativePercent;
     }
 
-    public void setMinPercent(double minPercent) {
-        this.minPercent = minPercent;
+    public void setNegativePercent(double negativePercent) {
+        this.negativePercent = negativePercent;
     }
 
-    public double getMaxPercent() {
-        return maxPercent;
+    public double getPositivePercent() {
+        return positivePercent;
     }
 
-    public void setMaxPercent(double maxPercent) {
-        this.maxPercent = maxPercent;
+    public void setPositivePercent(double positivePercent) {
+        this.positivePercent = positivePercent;
     }
 
     public int getPercentMoves() {
