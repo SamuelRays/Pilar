@@ -39,7 +39,7 @@ public class Player {
         this.name = name;
     }
 
-    public void addCountryField(CountryField field) {
+    public void buyCountryField(CountryField field) {
         money -= field.getPrice();
         countries.add(field);
         field.setPlayer(this);
