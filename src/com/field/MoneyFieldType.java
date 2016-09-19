@@ -1,22 +1,16 @@
 package com.field;
 
 public enum MoneyFieldType implements FieldType {
-    TAX("Tax", -5000),
-    FORWARD("Forward", 5000);
+    TAX("Tax"),
+    FORWARD("Forward");
 
     private String name;
-    private long amount;
 
-    MoneyFieldType(String name, long amount) {
+    MoneyFieldType(String name) {
         this.name = name;
-        this.amount = amount;
     }
 
     public String getName() {
         return name;
-    }
-
-    public long getAmount() {
-        return amount;
     }
 }

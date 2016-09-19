@@ -2,9 +2,8 @@ package com.field;
 
 import com.Player;
 
-public class CountryField implements Field {
-    private String name;
-    private CountryFieldType countryFieldType;
+public class CountryField extends Field {
+    private Union union;
     private int price;
     private int cityPrice;
     private int visitCostPerCity;
@@ -13,19 +12,15 @@ public class CountryField implements Field {
     private Player player;
 
     public CountryField(CountryFieldType countryFieldType) {
-        this.countryFieldType = countryFieldType;
+        union = countryFieldType.getUnion();
         name = countryFieldType.getName();
         price = countryFieldType.getPrice();
         cityPrice = countryFieldType.getCityPrice();
         visitCostPerCity = countryFieldType.getVisitCostPerCity();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public CountryFieldType getCountryFieldType() {
-        return countryFieldType;
+    public Union getUnion() {
+        return union;
     }
 
     public int getPrice() {

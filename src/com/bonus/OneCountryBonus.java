@@ -10,31 +10,31 @@ public class OneCountryBonus extends Bonus {
     private void setRatio(int level) {
         switch (level) {
             case 1:
-                player.setOneCountryBonus(1.4);
+                player.setOneCountryBonusRatio(1.4);
                 return;
             case 2:
-                player.setOneCountryBonus(2);
+                player.setOneCountryBonusRatio(2);
                 return;
             case 3:
-                player.setOneCountryBonus(3);
+                player.setOneCountryBonusRatio(3);
                 return;
             case 4:
-                player.setOneCountryBonus(5);
+                player.setOneCountryBonusRatio(5);
                 return;
             case 5:
-                player.setOneCountryBonus(7);
+                player.setOneCountryBonusRatio(7);
                 return;
             case 6:
-                player.setOneCountryBonus(10);
+                player.setOneCountryBonusRatio(10);
                 return;
             case 7:
-                player.setOneCountryBonus(15);
+                player.setOneCountryBonusRatio(15);
                 return;
             case 8:
-                player.setOneCountryBonus(30);
+                player.setOneCountryBonusRatio(30);
                 return;
             case 9:
-                player.setOneCountryBonus(100);
+                player.setOneCountryBonusRatio(100);
                 return;
         }
     }

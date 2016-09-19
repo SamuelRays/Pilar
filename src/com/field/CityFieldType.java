@@ -1,22 +1,16 @@
 package com.field;
 
 public enum CityFieldType implements FieldType {
-    NEGATIVE_CITY_BONUS("Negative City Bonus", -1),
-    POSITIVE_BONUS_MAX("Positive City Bonus", 1);
+    NEGATIVE_CITY_BONUS("Negative City Bonus"),
+    POSITIVE_BONUS_MAX("Positive City Bonus");
 
     private String name;
-    private int amount;
 
-    CityFieldType(String name, int amount) {
+    CityFieldType(String name) {
         this.name = name;
-        this.amount = amount;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }

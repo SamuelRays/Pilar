@@ -33,14 +33,14 @@ public class Player {
     private int percentMoves = 3;
     private double ultraPercent = 2;
     private int ultraPercentMoves = 1;
-    private double oneCountryBonus = 1.4;
+    private double oneCountryBonusRatio = 1.4;
 
     public Player(String name) {
         this.name = name;
     }
 
     public void addCountryField(CountryField field) {
-        money -= field.getCountryFieldType().getPrice();
+        money -= field.getPrice();
         countries.add(field);
         field.setPlayer(this);
         checkUnion(field);
@@ -246,16 +246,16 @@ public class Player {
         this.ultraPercentMoves = ultraPercentMoves;
     }
 
-    public double getOneCountryBonus() {
-        return oneCountryBonus;
+    public double getOneCountryBonusRatio() {
+        return oneCountryBonusRatio;
     }
 
-    public void setOneCountryBonus(double oneCountryBonus) {
-        this.oneCountryBonus = oneCountryBonus;
+    public void setOneCountryBonusRatio(double oneCountryBonusRatio) {
+        this.oneCountryBonusRatio = oneCountryBonusRatio;
     }
 
     private void checkUnion(CountryField field) {
-        Union union = field.getCountryFieldType().getUnion();
+        Union union = field.getUnion();
         if (countries.containsAll(union.getCountries())) {
             try {
                 Bonus bonus = (Bonus) union.getBonus().newInstance();

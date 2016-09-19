@@ -1,4 +1,16 @@
 package com.field;
 
-public interface Field {
+import com.Player;
+
+public abstract class Field {
+    protected String name;
+    protected Player currentPlayer;
+
+    public String getName() {
+        return name;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
 }
