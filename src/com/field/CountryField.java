@@ -24,56 +24,28 @@ public class CountryField implements Field {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public CountryFieldType getCountryFieldType() {
         return countryFieldType;
-    }
-
-    public void setCountryFieldType(CountryFieldType countryFieldType) {
-        this.countryFieldType = countryFieldType;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public int getCityPrice() {
         return cityPrice;
-    }
-
-    public void setCityPrice(int cityPrice) {
-        this.cityPrice = cityPrice;
     }
 
     public int getVisitCostPerCity() {
         return visitCostPerCity;
     }
 
-    public void setVisitCostPerCity(int visitCostPerCity) {
-        this.visitCostPerCity = visitCostPerCity;
-    }
-
     public int getCityAmount() {
         return cityAmount;
     }
 
-    public void setCityAmount(int cityAmount) {
-        this.cityAmount = cityAmount;
-    }
-
     public int getWonderAmount() {
         return wonderAmount;
-    }
-
-    public void setWonderAmount(int wonderAmount) {
-        this.wonderAmount = wonderAmount;
     }
 
     public Player getPlayer() {
