@@ -2,10 +2,7 @@ package com;
 
 import com.field.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Game {
     public static final int DEFAULT_NEGATIVE_CITY_INCREASE = -1;
@@ -18,7 +15,7 @@ public class Game {
     public static final int DEFAULT_AVAILABLE_THROWS = 1;
     public static final long DEFAULT_SALARY = 5000;
     public static final long DEFAULT_FORWARD_BONUS = 5000;
-    public static final long DEFAULT_TAX = -5000;
+    public static final long DEFAULT_TAX = 5000;
     public static final int DEFAULT_CITIES_FOR_WONDER_1 = 3;
     public static final int DEFAULT_CITIES_FOR_WONDER_2 = 0;
     public static final int DEFAULT_CITIES_FOR_WONDER_3 = 0;
@@ -85,6 +82,31 @@ public class Game {
         gameField.add(new CountryField(CountryFieldType.KUWAIT));
         gameField.add(new CountryField(CountryFieldType.QATAR));
         gameField.add(new PercentField(PercentFieldType.ULTRA_PERCENT_FIELD));
+    }
+
+    public void move(Player player, int[] dice, boolean isForward) {
+        int playerCurrentField = gameField.indexOf(player.getCurrentField());
+        int nextPlayerField = 0;
+        if (isForward) {
+            nextPlayerField = playerCurrentField + dice[0] + dice[1];
+        } else {
+            nextPlayerField = playerCurrentField - dice[0] - dice[1];
+        }
+        if (nextPlayerField >= gameField.size()) {
+            player.earn(player.getSalary());
+            nextPlayerField = nextPlayerField % gameField.size();
+        } else if (nextPlayerField < 0) {
+            nextPlayerField = gameField.size() + nextPlayerField;
+        }
+        player.setCurrentField(gameField.get(nextPlayerField));
+        player.enterField();
+    }
+
+    public int[] throwDice() {
+        Random random = new Random();
+        int a = random.nextInt(6) + 1;
+        int b = random.nextInt(6) + 1;
+        return new int[]{a, b};
     }
 
     public List<Field> getGameField() {

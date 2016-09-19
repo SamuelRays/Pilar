@@ -10,13 +10,41 @@ public class CountryField extends Field {
     private int cityAmount = 0;
     private int wonderAmount = 0;
     private Player player;
+    private boolean isUnionCompleted = false;
 
     public CountryField(CountryFieldType countryFieldType) {
+        type = countryFieldType;
         union = countryFieldType.getUnion();
         name = countryFieldType.getName();
         price = countryFieldType.getPrice();
         cityPrice = countryFieldType.getCityPrice();
         visitCostPerCity = countryFieldType.getVisitCostPerCity();
+    }
+
+    public void buildCities(int amount) {
+        cityAmount += amount;
+        if (amount > 0) {
+            checkWonders();
+        } else if (cityAmount < 0) {
+            cityAmount = 0;
+        }
+    }
+
+    public void checkWonders() {
+        int w1 = player.getCitiesForWonder1();
+        int w2 = player.getCitiesForWonder2();
+        int w3 = player.getCitiesForWonder3();
+        int w4 = player.getCitiesForWonder4();
+        wonderAmount = cityAmount / w1;
+        if (w2 != 0) {
+            wonderAmount += cityAmount / w2;
+        }
+        if (w3 != 0) {
+            wonderAmount += cityAmount / w3;
+        }
+        if (w4 != 0) {
+            wonderAmount += cityAmount / w4;
+        }
     }
 
     public Union getUnion() {
@@ -49,5 +77,13 @@ public class CountryField extends Field {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public boolean isUnionCompleted() {
+        return isUnionCompleted;
+    }
+
+    public void setUnionCompleted(boolean unionCompleted) {
+        isUnionCompleted = unionCompleted;
     }
 }
