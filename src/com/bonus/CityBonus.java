@@ -1,64 +1,49 @@
 package com.bonus;
 
 public class CityBonus extends Bonus {
-    private int min = -1;
-    private int max = 1;
-
     @Override
     public void increaseLevel() {
         super.increaseLevel();
         setMinMax();
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public int getMin() {
-        return min;
-    }
-
-    public int getMax() {
-        return max;
-    }
-
     private void setMinMax() {
         switch (level) {
             case 1:
-                min = 3;
-                max = 7;
+                player.setMinCityIncrease(3);
+                player.setMaxCityIncrease(7);
                 return;
             case 2:
-                min = 5;
-                max = 10;
+                player.setMinCityIncrease(5);
+                player.setMaxCityIncrease(10);
                 return;
             case 3:
-                min = 7;
-                max = 13;
+                player.setMinCityIncrease(7);
+                player.setMaxCityIncrease(13);
                 return;
             case 4:
-                min = 10;
-                max = 18;
+                player.setMinCityIncrease(10);
+                player.setMaxCityIncrease(18);
                 return;
             case 5:
-                min = 15;
-                max = 25;
+                player.setMinCityIncrease(15);
+                player.setMaxCityIncrease(25);
                 return;
             case 6:
-                min = 20;
-                max = 35;
+                player.setMinCityIncrease(20);
+                player.setMaxCityIncrease(35);
                 return;
             case 7:
-                min = 35;
-                max = 60;
+                player.setMinCityIncrease(35);
+                player.setMaxCityIncrease(60);
                 return;
             case 8:
-                min = 60;
-                max = 100;
+                player.setMinCityIncrease(60);
+                player.setMaxCityIncrease(100);
                 return;
             case 9:
-                min = 120;
-                max = 200;
+                player.setMinCityIncrease(120);
+                player.setMaxCityIncrease(200);
                 return;
         }
     }

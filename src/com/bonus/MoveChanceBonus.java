@@ -1,4 +1,4 @@
 package com.bonus;
 
-public class MoveChanceBonus implements Bonus {
+public class MoveChanceBonus extends Bonus {
 }

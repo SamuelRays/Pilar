@@ -12,7 +12,7 @@ public abstract class Bonus {
             long price = Game.bonusPrices.get(level + 1);
             if (player.getMoney() >= price) {
                 level++;
-                player.spendMoney(price);
+                player.pay(price);
             } else {
                 //TODO
                 return;
