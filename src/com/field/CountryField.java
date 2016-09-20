@@ -14,7 +14,7 @@ public class CountryField extends Field {
 
     public CountryField(CountryFieldType countryFieldType) {
         type = countryFieldType;
-        union = countryFieldType.getUnion();
+        union = new Union(countryFieldType.getUnionType());
         name = countryFieldType.getName();
         price = countryFieldType.getPrice();
         cityPrice = countryFieldType.getCityPrice();

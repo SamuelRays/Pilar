@@ -1,10 +1,22 @@
 package com.bonus;
 
+import com.Game;
+import com.field.CountryField;
+
 public class WonderBonus extends Bonus {
     @Override
     public void increaseLevel() {
         super.increaseLevel();
         setCitiesAmountNeeded(level);
+        player.getCountries().forEach(CountryField::checkWonders);
+    }
+
+    @Override
+    protected void nullStates() {
+        player.setCitiesForWonder2(Game.DEFAULT_CITIES_FOR_WONDER_2);
+        player.setCitiesForWonder3(Game.DEFAULT_CITIES_FOR_WONDER_3);
+        player.setCitiesForWonder4(Game.DEFAULT_CITIES_FOR_WONDER_4);
+        player.getCountries().forEach(CountryField::checkWonders);
     }
 
     private void setCitiesAmountNeeded(int level) {

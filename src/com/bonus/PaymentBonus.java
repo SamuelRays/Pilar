@@ -1,10 +1,17 @@
 package com.bonus;
 
+import com.Game;
+
 public class PaymentBonus extends Bonus {
     @Override
     public void increaseLevel() {
         super.increaseLevel();
         setRatio(level);
+    }
+
+    @Override
+    protected void nullStates() {
+        player.setPaymentRatio(Game.DEFAULT_PAYMENT_RATIO);
     }
 
     private void setRatio(int level) {

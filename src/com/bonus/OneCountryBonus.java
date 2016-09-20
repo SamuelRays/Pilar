@@ -1,12 +1,19 @@
 package com.bonus;
 
+import com.Game;
+
 public class OneCountryBonus extends Bonus {
     @Override
     public void increaseLevel() {
         super.increaseLevel();
         setRatio(level);
     }
-    
+
+    @Override
+    protected void nullStates() {
+        player.setOneCountryBonusRatio(Game.DEFAULT_ONE_COUNTRY_BONUS_RATIO);
+    }
+
     private void setRatio(int level) {
         switch (level) {
             case 1:

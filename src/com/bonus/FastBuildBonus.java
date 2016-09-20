@@ -1,10 +1,17 @@
 package com.bonus;
 
+import com.Game;
+
 public class FastBuildBonus extends Bonus {
     @Override
     public void increaseLevel() {
         super.increaseLevel();
         setQuantity(level);
+    }
+
+    @Override
+    protected void nullStates() {
+        player.setCitiesPerTurnAvailable(Game.DEFAULT_CITIES_PER_TURN_AVAILABLE);
     }
 
     private void setQuantity(int level) {

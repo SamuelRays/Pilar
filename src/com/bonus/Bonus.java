@@ -30,4 +30,12 @@ public abstract class Bonus {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    public void nullLevel() {
+        level = 0;
+        nullStates();
+        player = null;
+    }
+
+    protected abstract void nullStates();
 }

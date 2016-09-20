@@ -1,10 +1,19 @@
 package com.bonus;
 
+import com.Game;
+
 public class MoneyBonus extends Bonus {
     @Override
     public void increaseLevel() {
         super.increaseLevel();
         setStats(level);
+    }
+
+    @Override
+    protected void nullStates() {
+        player.setSalary(Game.DEFAULT_SALARY);
+        player.setTax(Game.DEFAULT_TAX);
+        player.setForwardBonus(Game.DEFAULT_FORWARD_BONUS);
     }
 
     private void setStats(int level) {

@@ -1,10 +1,19 @@
 package com.bonus;
 
+import com.Game;
+
 public class FreeCityBonus extends Bonus {
     @Override
     public void increaseLevel() {
         super.increaseLevel();
         setStates(level);
+    }
+
+    @Override
+    protected void nullStates() {
+        player.setFirstCityPriceRatio(Game.DEFAULT_FIRST_CITY_PRICE_RATIO);
+        player.setSecondCityPriceRatio(Game.DEFAULT_SECOND_CITY_PRICE_RATIO);
+        player.setThirdCityPriceRatio(Game.DEFAULT_THIRD_CITY_PRICE_RATIO);
     }
 
     private void setStates(int level) {

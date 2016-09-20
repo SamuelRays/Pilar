@@ -1,10 +1,20 @@
 package com.bonus;
 
+import com.Game;
+
 public class PercentBonus extends Bonus {
     @Override
     public void increaseLevel() {
         super.increaseLevel();
         setPercents(level);
+    }
+
+    @Override
+    protected void nullStates() {
+        player.setNegativePercent(Game.DEFAULT_NEGATIVE_PERCENT);
+        player.setPositivePercent(Game.DEFAULT_POSITIVE_PERCENT);
+        player.setUltraPercent(Game.DEFAULT_ULTRA_PERCENT);
+        player.setPercentMoves(Game.DEFAULT_PERCENT_MOVES);
     }
 
     private void setPercents(int level) {

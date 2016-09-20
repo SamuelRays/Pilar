@@ -1,10 +1,18 @@
 package com.bonus;
 
+import com.Game;
+
 public class CityBonus extends Bonus {
     @Override
     public void increaseLevel() {
         super.increaseLevel();
         setMinMax();
+    }
+
+    @Override
+    protected void nullStates() {
+        player.setNegativeCityIncrease(Game.DEFAULT_NEGATIVE_CITY_INCREASE);
+        player.setPositiveCityIncrease(Game.DEFAULT_POSITIVE_CITY_INCREASE);
     }
 
     private void setMinMax() {

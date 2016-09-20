@@ -55,9 +55,24 @@ public class Player {
         countries.add(field);
         field.setPlayer(this);
         checkUnion(field);
+        player.sellCountryField(field, price);
     }
 
+    public void sellCountryField(CountryField field) {
+        checkBonus(field);
+        field.setPlayer(null);
+        field.checkWonders();
+        countries.remove(field);
+        earn(field.getPrice());
+    }
 
+    public void sellCountryField(CountryField field, long price) {
+        checkBonus(field);
+        field.setPlayer(null);
+        field.checkWonders();
+        countries.remove(field);
+        earn(price);
+    }
 
     public void earn(long amount) {
         money += amount;
@@ -311,15 +326,17 @@ public class Player {
     private void checkUnion(CountryField field) {
         Union union = field.getUnion();
         if (countries.containsAll(union.getCountries())) {
-            try {
-                Bonus bonus = (Bonus) union.getBonus().newInstance();
-                bonuses.add(bonus);
-                bonus.setPlayer(this);
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            Bonus bonus = union.getBonus();
+            bonuses.add(bonus);
+            bonus.setPlayer(this);
+        }
+    }
+
+    private void checkBonus(CountryField field) {
+        Bonus bonus = field.getUnion().getBonus();
+        if (bonuses.contains(bonus)) {
+            bonus.nullLevel();
+            bonuses.remove(bonus);
         }
     }
 }

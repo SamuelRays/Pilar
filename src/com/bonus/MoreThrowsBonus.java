@@ -1,10 +1,17 @@
 package com.bonus;
 
+import com.Game;
+
 public class MoreThrowsBonus extends Bonus {
     @Override
     public void increaseLevel() {
         super.increaseLevel();
         setThrowsAmount(level);
+    }
+
+    @Override
+    protected void nullStates() {
+        player.setAvailableThrows(Game.DEFAULT_AVAILABLE_THROWS);
     }
 
     private void setThrowsAmount(int level) {
