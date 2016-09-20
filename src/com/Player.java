@@ -8,6 +8,7 @@ import java.util.Set;
 public class Player {
     private Game game;
     private String name;
+    private boolean isLost = false;
     private Set<Bonus> bonuses;
     private Field currentField;
     private Set<CountryField> countries;
@@ -20,6 +21,7 @@ public class Player {
     private double paymentRatio = Game.DEFAULT_PAYMENT_RATIO;
     private int citiesPerTurnAvailable = Game.DEFAULT_CITIES_PER_TURN_AVAILABLE;
     private int availableThrows = Game.DEFAULT_AVAILABLE_THROWS;
+    private int currentAvailableThrows = availableThrows;
     private long salary = Game.DEFAULT_SALARY;
     private long forwardBonus = Game.DEFAULT_FORWARD_BONUS;
     private long tax = Game.DEFAULT_TAX;
@@ -42,11 +44,20 @@ public class Player {
     }
 
     public void buyCountryField(CountryField field) {
-        money -= field.getPrice();
+        pay(field.getPrice());
         countries.add(field);
         field.setPlayer(this);
         checkUnion(field);
     }
+
+    public void buyCountryField(CountryField field, Player player, long price) {
+        pay(price, player);
+        countries.add(field);
+        field.setPlayer(this);
+        checkUnion(field);
+    }
+
+
 
     public void earn(long amount) {
         money += amount;
@@ -56,81 +67,9 @@ public class Player {
         money -= amount;
     }
 
-    private void pay(long amount, Player player) {
-        money -= amount;
+    public void pay(long amount, Player player) {
+        pay(amount);
         player.earn(amount);
-    }
-
-    public void enterField() {
-        currentField.setCurrentPlayer(this);
-        if (currentField instanceof CityField) {
-            countries.stream().filter(CountryField::isUnionCompleted).forEach(i -> {
-                if (currentField.getType().equals(CityFieldType.NEGATIVE_CITY_BONUS)) {
-                    i.buildCities(negativeCityIncrease);
-                } else {
-                    i.buildCities(positiveCityIncrease);
-                }
-            });
-        } else if (currentField instanceof MoneyField) {
-            if (currentField.getType().equals(MoneyFieldType.FORWARD)) {
-                earn(forwardBonus);
-            } else {
-                pay(tax);
-            }
-        } else if (currentField instanceof PortField) {
-            int[] dice = game.throwDice();
-            int sum = dice[0] + dice[1];
-            if (currentField.getType().equals(PortFieldType.EVEN_PORT)) {
-                if (sum % 2 == 0) {
-                    game.move(this, dice, true);
-                } else {
-                    game.move(this, dice, false);
-                }
-            } else {
-                if (sum % 2 == 0) {
-                    game.move(this, dice, false);
-                } else {
-                    game.move(this, dice, true);
-                }
-            }
-        } else if (currentField instanceof PercentField) {
-            if (currentField.getType().equals(PercentFieldType.NEGATIVE_PERCENT_FIELD)) {
-                addNegativePercentMovesLeft(percentMoves);
-            } else if (currentField.getType().equals(PercentFieldType.POSITIVE_PERCENT_FIELD)) {
-                addPositivePercentMovesLeft(percentMoves);
-            } else {
-                addUltraPercentMovesLeft(ultraPercentMoves);
-            }
-        } else {
-            CountryField field = (CountryField) currentField;
-            if (countries.contains(field)) {
-                return;
-            } else if (field.getPlayer() == null) {
-                buyCountryField(field);
-                //TODO
-            } else {
-                Player player = field.getPlayer();
-                int negMoves = player.getNegativePercentMovesLeft();
-                int posMoves = player.getPositivePercentMovesLeft();
-                int ultraMoves = player.getUltraPercentMovesLeft();
-                double neg = 1;
-                double pos = 1;
-                double ultra = 1;
-                if (negMoves != 0) {
-                    neg = player.getNegativePercent();
-                }
-                if (posMoves != 0) {
-                    pos = player.getPositivePercent();
-                }
-                if (ultraMoves != 0) {
-                    ultra = player.getUltraPercent();
-                }
-                long payment = (long) (neg * pos * ultra * paymentRatio * field.getCityAmount() *
-                        field.getVisitCostPerCity() * (1 + field.getWonderAmount() / 10.0));
-                pay(payment, player);
-                //TODO
-            }
-        }
     }
 
     public Game getGame() {
@@ -143,6 +82,14 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isLost() {
+        return isLost;
+    }
+
+    public void setLost(boolean lost) {
+        isLost = lost;
     }
 
     public Set<Bonus> getBonuses() {
@@ -227,6 +174,18 @@ public class Player {
 
     public void setAvailableThrows(int availableThrows) {
         this.availableThrows = availableThrows;
+    }
+
+    public int getCurrentAvailableThrows() {
+        return currentAvailableThrows;
+    }
+
+    public void decreaseCurrentAvailableThrows() {
+        this.currentAvailableThrows--;
+    }
+
+    public void resetCurrentAvailableThrows() {
+        this.currentAvailableThrows = availableThrows;
     }
 
     public long getSalary() {
@@ -337,7 +296,7 @@ public class Player {
         this.ultraPercent = ultraPercent;
     }
 
-    public double getUltraPercentMoves() {
+    public int getUltraPercentMoves() {
         return ultraPercentMoves;
     }
 
