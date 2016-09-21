@@ -12,11 +12,9 @@ public class Union {
     private Set<CountryFieldType> countryTypes;
     private Set<CountryField> countries = new HashSet<>();
     Bonus bonus;
-    private Player player;
     private boolean isFull = false;
 
     public Union(UnionType unionType, Player player) {
-        this.player = player;
         bonus.setPlayer(player);
         this.unionType = unionType;
         countryTypes = unionType.getCountries();
@@ -71,10 +69,6 @@ public class Union {
     }
 
     private void checkIsFull() {
-        if (countries.size() == countryTypes.size()) {
-            isFull = true;
-        } else {
-            isFull = false;
-        }
+        isFull = countries.size() == countryTypes.size();
     }
 }
