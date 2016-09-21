@@ -2,6 +2,7 @@ package com.field;
 
 import com.Player;
 import com.bonus.Bonus;
+import com.bonus.BonusFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,13 +20,7 @@ public class Union {
         bonus.setPlayer(player);
         this.unionType = unionType;
         countryTypes = unionType.getCountries();
-        try {
-            bonus = (Bonus) unionType.getBonus().newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        bonus = BonusFactory.getBonus(unionType.getBonus());
     }
 
     public void buyBonusLevel() {

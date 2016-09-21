@@ -1,7 +1,7 @@
 package com.field;
 
 public class FieldFactory {
-    public Field getField(FieldType type) {
+    public static Field getField(FieldType type) {
         if (type instanceof CountryFieldType) {
             return new CountryField((CountryFieldType) type);
         }
