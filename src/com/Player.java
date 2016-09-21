@@ -38,6 +38,10 @@ public class Player {
     private int ultraPercentMoves = Game.DEFAULT_ULTRA_PERCENT_MOVES;
     private int ultraPercentMovesLeft;
     private double oneCountryBonusRatio = Game.DEFAULT_ONE_COUNTRY_BONUS_RATIO;
+    private int evenMoveChances = Game.DEFAULT_EVEN_MOVE_CHANCES;
+    private int moveChances = Game.DEFAULT_MOVE_CHANCES;
+    private int evenMoveChancesLeft;
+    private int moveChancesLeft;
 
     {
         for (UnionType i : UnionType.values()) {
@@ -63,7 +67,7 @@ public class Player {
 
     private void addCountry(CountryField field) {
         countries.add(field);
-        field.setPlayer(this);
+        field.setOwner(this);
         for (Union i : unions) {
             i.addCountry(field);
         }
@@ -84,7 +88,7 @@ public class Player {
                 i.nullBonus();
             }
         }
-        field.setPlayer(null);
+        field.setOwner(null);
         field.checkWonders();
         countries.remove(field);
         earn(price);
@@ -131,7 +135,7 @@ public class Player {
         } else {
             countryField.getUnion().buildOrDestroyCitiesInEachCountry(-1);
             int count = countryField.getCityAmount() / 3 + 1;
-            earn((count * countryField.getCityPrice()));
+            earn(count * countryField.getCityPrice());
         }
     }
 
@@ -350,6 +354,12 @@ public class Player {
         this.negativePercentMovesLeft += negativePercentMoves;
     }
 
+    public void decreaseNegativePercentMovesLeft() {
+        if (negativePercentMovesLeft != 0) {
+            negativePercentMovesLeft--;
+        }
+    }
+
     public int getPositivePercentMovesLeft() {
         return positivePercentMovesLeft;
     }
@@ -358,12 +368,24 @@ public class Player {
         this.positivePercentMovesLeft += positivePercentMoves;
     }
 
+    public void decreasePositivePercentMovesLeft() {
+        if (positivePercentMovesLeft != 0) {
+            positivePercentMovesLeft--;
+        }
+    }
+
     public int getUltraPercentMovesLeft() {
         return ultraPercentMovesLeft;
     }
 
     public void addUltraPercentMovesLeft(int ultraPercentMoves) {
         this.ultraPercentMovesLeft += ultraPercentMoves;
+    }
+
+    public void decreaseUltraPercentMovesLeft() {
+        if (ultraPercentMovesLeft != 0) {
+            ultraPercentMovesLeft--;
+        }
     }
 
     public double getUltraPercent() {
@@ -384,5 +406,45 @@ public class Player {
 
     public void setOneCountryBonusRatio(double oneCountryBonusRatio) {
         this.oneCountryBonusRatio = oneCountryBonusRatio;
+    }
+
+    public int getEvenMoveChances() {
+        return evenMoveChances;
+    }
+
+    public void setEvenMoveChances(int evenMoveChances) {
+        this.evenMoveChances = evenMoveChances;
+    }
+
+    public int getEvenMoveChancesLeft() {
+        return evenMoveChancesLeft;
+    }
+
+    public void decreaseEvenMoveChancesLeft() {
+        evenMoveChancesLeft--;
+    }
+
+    public void resetEvenMoveChancesLeft() {
+        evenMoveChancesLeft = evenMoveChances;
+    }
+
+    public int getMoveChances() {
+        return moveChances;
+    }
+
+    public void setMoveChances(int moveChances) {
+        this.moveChances = moveChances;
+    }
+
+    public int getMoveChancesLeft() {
+        return evenMoveChancesLeft;
+    }
+
+    public void decreaseMoveChancesLeft() {
+        evenMoveChancesLeft--;
+    }
+
+    public void resetMoveChancesLeft() {
+        evenMoveChancesLeft = evenMoveChances;
     }
 }

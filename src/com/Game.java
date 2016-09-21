@@ -26,6 +26,8 @@ public class Game {
     public static final int DEFAULT_PERCENT_MOVES = 3;
     public static final int DEFAULT_ULTRA_PERCENT_MOVES = 1;
     public static final double DEFAULT_ONE_COUNTRY_BONUS_RATIO = 1;
+    public static final int DEFAULT_EVEN_MOVE_CHANCES = 0;
+    public static final int DEFAULT_MOVE_CHANCES = 0;
     public static final Map<Integer, Long> BONUS_PRICES = new HashMap<>();
     private List<Field> gameField = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
@@ -101,17 +103,24 @@ public class Game {
         while (players.size() != 1) {
             for (int i = 0; i < players.size(); i++) {
                 playerTurn(players.get(i));
+                if (players.get(i).isLost()) {
+                    players.remove(i--);
+                }
             }
         }
     }
 
     public void playerTurn(Player player) {
-        while (player.getCurrentAvailableThrows() != 0) {
+        player.decreaseNegativePercentMovesLeft();
+        player.decreasePositivePercentMovesLeft();
+        player.decreaseUltraPercentMovesLeft();
+        while (hasAvailableMoves(player)) {
             int[] dice = throwDice();
             if (!isDouble(dice)) {
                 player.decreaseCurrentAvailableThrows();
             }
-            move(player, dice, true);
+            int fieldsToMove = dice[0] + dice[1];
+            move(player, fieldsToMove, true);
             playerEnterField(player);
         }
     }
@@ -137,15 +146,15 @@ public class Game {
             int sum = dice[0] + dice[1];
             if (player.getCurrentField().getType().equals(PortFieldType.EVEN_PORT)) {
                 if (sum % 2 == 0) {
-                    move(player, dice, true);
+                    move(player, sum, true);
                 } else {
-                    move(player, dice, false);
+                    move(player, sum, false);
                 }
             } else {
                 if (sum % 2 == 0) {
-                    move(player, dice, false);
+                    move(player, sum, false);
                 } else {
-                    move(player, dice, true);
+                    move(player, sum, true);
                 }
             }
         } else if (player.getCurrentField() instanceof PercentField) {
@@ -160,11 +169,11 @@ public class Game {
             CountryField countryField = (CountryField) player.getCurrentField();
             if (player.getCountries().contains(countryField)) {
                 return;
-            } else if (countryField.getPlayer() == null) {
+            } else if (countryField.getOwner() == null) {
                 player.buyCountryField(countryField);
                 //TODO
             } else {
-                Player owner = countryField.getPlayer();
+                Player owner = countryField.getOwner();
                 int negMoves = owner.getNegativePercentMovesLeft();
                 int posMoves = owner.getPositivePercentMovesLeft();
                 int ultraMoves = owner.getUltraPercentMovesLeft();
@@ -180,21 +189,28 @@ public class Game {
                 if (ultraMoves != 0) {
                     ultra = owner.getUltraPercent();
                 }
-                long payment = (long) (neg * pos * ultra * owner.getPaymentRatio() * countryField.getCityAmount() *
+                long payment = (long) (countryField.getOneCountryBonusRatio() * neg * pos *
+                        ultra * owner.getPaymentRatio() * countryField.getCityAmount() *
                         countryField.getVisitCostPerCity() * (1 + countryField.getWonderAmount() / 10.0));
                 player.pay(payment, owner);
                 //TODO
+                if (owner.getMoveChancesLeft() != 0) {
+                    owner.decreaseMoveChancesLeft();
+                    move(player, playerNextField(owner, gameField.indexOf(countryField)), true);
+                } else if (owner.getEvenMoveChancesLeft() != 0) {
+                    //TODO!!!!!!!!!
+                }
             }
         }
     }
 
-    public void move(Player player, int[] dice, boolean isForward) {
+    public void move(Player player, int fieldsToMove, boolean isForward) {
         int playerCurrentField = gameField.indexOf(player.getCurrentField());
         int nextPlayerField = 0;
         if (isForward) {
-            nextPlayerField = playerCurrentField + dice[0] + dice[1];
+            nextPlayerField = playerCurrentField + fieldsToMove;
         } else {
-            nextPlayerField = playerCurrentField - dice[0] - dice[1];
+            nextPlayerField = playerCurrentField - fieldsToMove;
         }
         if (nextPlayerField >= gameField.size()) {
             player.earn(player.getSalary());
@@ -223,5 +239,27 @@ public class Game {
     
     private boolean hasAvailableMoves(Player player) {
         return player.getCurrentAvailableThrows() != 0;
+    }
+
+    private int playerNextField(Player player, int currentPos) {
+        for (int i = currentPos + 1; i < gameField.size(); i++) {
+            Field field = gameField.get(i);
+            if (field instanceof CountryField) {
+                CountryField countryField = (CountryField) field;
+                if (countryField.getOwner().equals(player)) {
+                    return i - currentPos;
+                }
+            }
+        }
+        for (int i = 0; i < currentPos; i++) {
+            Field field = gameField.get(i);
+            if (field instanceof CountryField) {
+                CountryField countryField = (CountryField) field;
+                if (countryField.getOwner().equals(player)) {
+                    return i + gameField.size() - currentPos;
+                }
+            }
+        }
+        return 0;
     }
 }

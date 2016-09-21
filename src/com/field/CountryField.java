@@ -9,7 +9,8 @@ public class CountryField extends Field {
     private int visitCostPerCity;
     private int cityAmount = 0;
     private int wonderAmount = 0;
-    private Player player;
+    private Player owner;
+    private double OneCountryBonusRatio = 1;
 
     public CountryField(CountryFieldType countryFieldType) {
         type = countryFieldType;
@@ -27,10 +28,10 @@ public class CountryField extends Field {
     }
 
     public void checkWonders() {
-        int w1 = player.getCitiesForWonder1();
-        int w2 = player.getCitiesForWonder2();
-        int w3 = player.getCitiesForWonder3();
-        int w4 = player.getCitiesForWonder4();
+        int w1 = owner.getCitiesForWonder1();
+        int w2 = owner.getCitiesForWonder2();
+        int w3 = owner.getCitiesForWonder3();
+        int w4 = owner.getCitiesForWonder4();
         wonderAmount = cityAmount / w1;
         if (w2 != 0) {
             wonderAmount += cityAmount / w2;
@@ -71,11 +72,19 @@ public class CountryField extends Field {
         return wonderAmount;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Player getOwner() {
+        return owner;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
+
+    public double getOneCountryBonusRatio() {
+        return OneCountryBonusRatio;
+    }
+
+    public void setOneCountryBonusRatio(double oneCountryBonusRatio) {
+        OneCountryBonusRatio = oneCountryBonusRatio;
     }
 }

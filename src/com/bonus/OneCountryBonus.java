@@ -1,6 +1,7 @@
 package com.bonus;
 
 import com.Game;
+import com.field.CountryField;
 
 public class OneCountryBonus extends Bonus {
     @Override
@@ -12,6 +13,9 @@ public class OneCountryBonus extends Bonus {
     @Override
     protected void nullStates() {
         player.setOneCountryBonusRatio(Game.DEFAULT_ONE_COUNTRY_BONUS_RATIO);
+        for (CountryField i : player.getCountries()) {
+            i.setOneCountryBonusRatio(Game.DEFAULT_ONE_COUNTRY_BONUS_RATIO);
+        }
     }
 
     private void setRatio(int level) {

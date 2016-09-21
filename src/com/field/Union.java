@@ -43,11 +43,8 @@ public class Union {
 
     public void removeCountry(CountryField field) {
         countries.remove(field);
+        field.setUnion(null);
         checkIsFull();
-    }
-
-    public Set<CountryFieldType> getCountryTypes() {
-        return countryTypes;
     }
 
     public Set<CountryField> getCountries() {
