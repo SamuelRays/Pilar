@@ -59,11 +59,7 @@ public class Player {
     }
 
     public void sellCountryField(CountryField field) {
-        checkBonus(field);
-        field.setPlayer(null);
-        field.checkWonders();
-        countries.remove(field);
-        earn(field.getPrice());
+        sellCountryField(field, field.getPrice());
     }
 
     public void sellCountryField(CountryField field, long price) {
@@ -72,6 +68,53 @@ public class Player {
         field.checkWonders();
         countries.remove(field);
         earn(price);
+    }
+
+    public void buildCities(CountryField countryField, int amount) {
+        for (int i = 0; i < amount; i++) {
+            buildCity(countryField);
+        }
+    }
+
+    private void buildCity(CountryField countryField) {
+        if (!bonuses.contains(countryField.getUnion().getBonus())) {
+            //TODO
+        } else {
+            for (CountryField i : countries) {
+                if (i.getUnion().equals(countryField.getUnion())) {
+                    i.buildOrDestroyCities(1);
+                }
+            }
+            int count = countryField.getCityAmount() / 3 + 1;
+            int pred = countryField.getCityAmount() % 3;
+            if (pred == 1) {
+                pay((long) (firstCityPriceRatio * count * countryField.getCityPrice()));
+            } else if (pred == 2) {
+                pay((long) (secondCityPriceRatio * count * countryField.getCityPrice()));
+            } else {
+                pay((long) (thirdCityPriceRatio * count * countryField.getCityPrice()));
+            }
+        }
+    }
+
+    public void destroyCities(CountryField countryField, int amount) {
+        for (int i = 0; i < amount; i++) {
+            destroyCity(countryField);
+        }
+    }
+
+    private void destroyCity(CountryField countryField) {
+        if (countryField.getCityAmount() == 0) {
+            //TODO
+        } else {
+            for (CountryField i : countries) {
+                if (i.getUnion().equals(countryField.getUnion())) {
+                    i.buildOrDestroyCities(-1);
+                }
+            }
+            int count = countryField.getCityAmount() / 3 + 1;
+            earn((count * countryField.getCityPrice()));
+        }
     }
 
     public void earn(long amount) {

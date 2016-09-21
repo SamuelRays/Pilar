@@ -21,12 +21,10 @@ public class CountryField extends Field {
         visitCostPerCity = countryFieldType.getVisitCostPerCity();
     }
 
-    public void buildCities(int amount) {
+    public void buildOrDestroyCities(int amount) {
         cityAmount += amount;
         if (amount > 0) {
             checkWonders();
-        } else if (cityAmount < 0) {
-            cityAmount = 0;
         }
     }
 
