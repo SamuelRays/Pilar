@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Union {
-    private UnionType unionType;
     private Set<CountryFieldType> countryTypes;
     private Set<CountryField> countries = new HashSet<>();
     Bonus bonus;
@@ -16,7 +15,6 @@ public class Union {
 
     public Union(UnionType unionType, Player player) {
         bonus.setPlayer(player);
-        this.unionType = unionType;
         countryTypes = unionType.getCountries();
         bonus = BonusFactory.getBonus(unionType.getBonus());
     }
@@ -46,10 +44,6 @@ public class Union {
     public void removeCountry(CountryField field) {
         countries.remove(field);
         checkIsFull();
-    }
-
-    public UnionType getUnionType() {
-        return unionType;
     }
 
     public Set<CountryFieldType> getCountryTypes() {
