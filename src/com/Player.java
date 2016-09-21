@@ -1,15 +1,15 @@
 package com;
 
-import com.bonus.Bonus;
 import com.field.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Player {
     private Game game;
     private String name;
     private boolean isLost = false;
-    private Set<Bonus> bonuses;
+    private Set<Union> unions = new HashSet<>();
     private Field currentField;
     private Set<CountryField> countries;
     private long money;
@@ -39,23 +39,34 @@ public class Player {
     private int ultraPercentMovesLeft;
     private double oneCountryBonusRatio = Game.DEFAULT_ONE_COUNTRY_BONUS_RATIO;
 
+    {
+        for (UnionType i : UnionType.values()) {
+            unions.add(new Union(i, this));
+        }
+    }
+
     public Player(String name) {
         this.name = name;
     }
 
     public void buyCountryField(CountryField field) {
-        pay(field.getPrice());
-        countries.add(field);
-        field.setPlayer(this);
-        checkUnion(field);
+        buyCountryField(field, null, field.getPrice());
     }
 
     public void buyCountryField(CountryField field, Player player, long price) {
         pay(price, player);
+        addCountry(field);
+        if (player != null) {
+            player.sellCountryField(field, price);
+        }
+    }
+
+    private void addCountry(CountryField field) {
         countries.add(field);
         field.setPlayer(this);
-        checkUnion(field);
-        player.sellCountryField(field, price);
+        for (Union i : unions) {
+            i.addCountry(field);
+        }
     }
 
     public void sellCountryField(CountryField field) {
@@ -67,7 +78,12 @@ public class Player {
             //TODO
             destroyAllCities(field);
         }
-        checkBonus(field);
+        for (Union i : unions) {
+            if (i.getCountries().contains(field)) {
+                i.removeCountry(field);
+                i.nullBonus();
+            }
+        }
         field.setPlayer(null);
         field.checkWonders();
         countries.remove(field);
@@ -81,14 +97,10 @@ public class Player {
     }
 
     private void buildCity(CountryField countryField) {
-        if (!bonuses.contains(countryField.getUnion().getBonus())) {
+        if (!countryField.getUnion().isFull()) {
             //TODO
         } else {
-            for (CountryField i : countries) {
-                if (i.getUnion().equals(countryField.getUnion())) {
-                    i.buildOrDestroyCities(1);
-                }
-            }
+            countryField.getUnion().buildOrDestroyCitiesInEachCountry(1);
             int count = countryField.getCityAmount() / 3 + 1;
             int pred = countryField.getCityAmount() % 3;
             if (pred == 1) {
@@ -117,11 +129,7 @@ public class Player {
         if (countryField.getCityAmount() == 0) {
             //TODO
         } else {
-            for (CountryField i : countries) {
-                if (i.getUnion().equals(countryField.getUnion())) {
-                    i.buildOrDestroyCities(-1);
-                }
-            }
+            countryField.getUnion().buildOrDestroyCitiesInEachCountry(-1);
             int count = countryField.getCityAmount() / 3 + 1;
             earn((count * countryField.getCityPrice()));
         }
@@ -137,7 +145,9 @@ public class Player {
 
     public void pay(long amount, Player player) {
         pay(amount);
-        player.earn(amount);
+        if (player != null) {
+            player.earn(amount);
+        }
     }
 
     public Game getGame() {
@@ -158,10 +168,6 @@ public class Player {
 
     public void setLost(boolean lost) {
         isLost = lost;
-    }
-
-    public Set<Bonus> getBonuses() {
-        return bonuses;
     }
 
     public Field getCurrentField() {
@@ -374,22 +380,5 @@ public class Player {
 
     public void setOneCountryBonusRatio(double oneCountryBonusRatio) {
         this.oneCountryBonusRatio = oneCountryBonusRatio;
-    }
-
-    private void checkUnion(CountryField field) {
-        Union union = field.getUnion();
-        if (countries.containsAll(union.getCountries())) {
-            Bonus bonus = union.getBonus();
-            bonuses.add(bonus);
-            bonus.setPlayer(this);
-        }
-    }
-
-    private void checkBonus(CountryField field) {
-        Bonus bonus = field.getUnion().getBonus();
-        if (bonuses.contains(bonus)) {
-            bonus.nullLevel();
-            bonuses.remove(bonus);
-        }
     }
 }

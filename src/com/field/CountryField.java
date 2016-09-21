@@ -10,11 +10,9 @@ public class CountryField extends Field {
     private int cityAmount = 0;
     private int wonderAmount = 0;
     private Player player;
-    private boolean isUnionCompleted = false;
 
     public CountryField(CountryFieldType countryFieldType) {
         type = countryFieldType;
-        union = new Union(countryFieldType.getUnionType());
         name = countryFieldType.getName();
         price = countryFieldType.getPrice();
         cityPrice = countryFieldType.getCityPrice();
@@ -49,6 +47,10 @@ public class CountryField extends Field {
         return union;
     }
 
+    public void setUnion(Union union) {
+        this.union = union;
+    }
+
     public int getPrice() {
         return price;
     }
@@ -75,13 +77,5 @@ public class CountryField extends Field {
 
     public void setPlayer(Player player) {
         this.player = player;
-    }
-
-    public boolean isUnionCompleted() {
-        return isUnionCompleted;
-    }
-
-    public void setUnionCompleted(boolean unionCompleted) {
-        isUnionCompleted = unionCompleted;
     }
 }
