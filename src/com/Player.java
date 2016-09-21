@@ -170,6 +170,10 @@ public class Player {
         isLost = lost;
     }
 
+    public Set<Union> getUnions() {
+        return unions;
+    }
+
     public Field getCurrentField() {
         return currentField;
     }

@@ -119,11 +119,11 @@ public class Game {
     public void playerEnterField(Player player) {
         player.getCurrentField().setCurrentPlayer(player);
         if (player.getCurrentField() instanceof CityField) {
-            player.getCountries().stream().filter(CountryField::isUnionCompleted).forEach(i -> {
+            player.getUnions().stream().filter(Union::isFull).forEach(i -> {
                 if (player.getCurrentField().getType().equals(CityFieldType.NEGATIVE_CITY_BONUS)) {
-                    i.buildOrDestroyCities(player.getNegativeCityIncrease());
+                    i.buildOrDestroyCitiesInEachCountry(player.getNegativeCityIncrease());
                 } else {
-                    i.buildOrDestroyCities(player.getPositiveCityIncrease());
+                    i.buildOrDestroyCitiesInEachCountry(player.getPositiveCityIncrease());
                 }
             });
         } else if (player.getCurrentField() instanceof MoneyField) {
