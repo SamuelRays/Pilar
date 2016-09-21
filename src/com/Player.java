@@ -63,6 +63,10 @@ public class Player {
     }
 
     public void sellCountryField(CountryField field, long price) {
+        if (field.getCityAmount() != 0) {
+            //TODO
+            destroyAllCities(field);
+        }
         checkBonus(field);
         field.setPlayer(null);
         field.checkWonders();
@@ -94,6 +98,12 @@ public class Player {
             } else {
                 pay((long) (thirdCityPriceRatio * count * countryField.getCityPrice()));
             }
+        }
+    }
+
+    public void destroyAllCities(CountryField countryField) {
+        for (int i = 0; i < countryField.getCityAmount(); i++) {
+            destroyCity(countryField);
         }
     }
 
