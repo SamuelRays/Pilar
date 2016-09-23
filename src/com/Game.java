@@ -5,6 +5,7 @@ import com.field.*;
 import java.util.*;
 
 public class Game {
+    public static final long START_MONEY_AMOUNT = 750000;
     public static final int DEFAULT_NEGATIVE_CITY_INCREASE = -1;
     public static final int DEFAULT_POSITIVE_CITY_INCREASE = 1;
     public static final double DEFAULT_FIRST_CITY_PRICE_RATIO = 1;
@@ -190,7 +191,7 @@ public class Game {
                     ultra = owner.getUltraPercent();
                 }
                 long payment = (long) (countryField.getOneCountryBonusRatio() * neg * pos *
-                        ultra * owner.getPaymentRatio() * countryField.getCityAmount() *
+                        ultra * player.getPaymentRatio() * countryField.getCityAmount() *
                         countryField.getVisitCostPerCity() * (1 + countryField.getWonderAmount() / 10.0));
                 player.pay(payment, owner);
                 //TODO
@@ -198,7 +199,17 @@ public class Game {
                     owner.decreaseMoveChancesLeft();
                     move(player, playerNextField(owner, gameField.indexOf(countryField)), true);
                 } else if (owner.getEvenMoveChancesLeft() != 0) {
-                    //TODO!!!!!!!!!
+                    owner.decreaseEvenMoveChancesLeft();
+                    int[] dice = throwDice();
+                    if ((dice[0] + dice[1]) % 2 == 0) {
+                        move(player, playerNextField(owner, gameField.indexOf(countryField)), true);
+                    } else {
+                        owner.resetEvenMoveChancesLeft();
+                        owner.resetMoveChancesLeft();
+                    }
+                } else {
+                    owner.resetEvenMoveChancesLeft();
+                    owner.resetMoveChancesLeft();
                 }
             }
         }

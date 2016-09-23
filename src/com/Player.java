@@ -12,7 +12,7 @@ public class Player {
     private Set<Union> unions = new HashSet<>();
     private Field currentField;
     private Set<CountryField> countries;
-    private long money;
+    private long money = Game.START_MONEY_AMOUNT;
     private int negativeCityIncrease = Game.DEFAULT_NEGATIVE_CITY_INCREASE;
     private int positiveCityIncrease = Game.DEFAULT_POSITIVE_CITY_INCREASE;
     private double firstCityPriceRatio = Game.DEFAULT_FIRST_CITY_PRICE_RATIO;
