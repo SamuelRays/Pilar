@@ -87,6 +87,11 @@ public class Game {
         gameField.add(FieldFactory.getField(CountryFieldType.QATAR));
         gameField.add(FieldFactory.getField(PercentFieldType.ULTRA_PERCENT_FIELD));
     }
+
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.gameField.forEach(p -> System.out.println(p.getName()));
+    }
     
     public void addPlayer(Player player) {
         players.add(player);

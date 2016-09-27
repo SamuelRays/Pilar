@@ -1,12 +1,17 @@
 package com;
 
 import com.field.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class Player {
+    private static final Logger log = LoggerFactory.getLogger(Player.class);
 
+    public static final int PORT = 19000;
+    public static final String HOST = "localhost";
 
     private Game game;
     private String name;
