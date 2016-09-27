@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Player {
+
+
     private Game game;
     private String name;
     private boolean isLost = false;
@@ -437,14 +439,14 @@ public class Player {
     }
 
     public int getMoveChancesLeft() {
-        return evenMoveChancesLeft;
+        return moveChancesLeft;
     }
 
     public void decreaseMoveChancesLeft() {
-        evenMoveChancesLeft--;
+        moveChancesLeft--;
     }
 
     public void resetMoveChancesLeft() {
-        evenMoveChancesLeft = evenMoveChances;
+        moveChancesLeft = moveChances;
     }
 }
