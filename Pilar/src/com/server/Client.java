@@ -18,17 +18,14 @@ public class Client {
 
     public void startClient() {
         Socket socket = null;
-        BufferedReader in = null;
         try {
             socket = new Socket(HOST, PORT);
             ConsoleThread console = new ConsoleThread(socket);
             console.start();
             console.join();
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException | InterruptedException e) {
             log.error("Failed to read from socket", e);
         } finally {
-            Util.closeResource(in);
             Util.closeResource(socket);
         }
     }
@@ -36,9 +33,11 @@ public class Client {
     class ConsoleThread extends Thread {
         BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out;
+        BufferedReader in;
 
         public ConsoleThread(Socket socket) throws IOException {
             out = new PrintWriter(socket.getOutputStream());
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         }
 
         @Override
@@ -46,16 +45,18 @@ public class Client {
             try {
                 String line;
                 while ((line = console.readLine()) != null) {
-                    //TODO
                     out.println(line);
                     out.flush();
-                    log.info("Player requests {} operation", line);
+                    while (in.ready()) {
+                        System.out.println(in.readLine());
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                Util.closeResource(out);
                 Util.closeResource(console);
+                Util.closeResource(out);
+                Util.closeResource(in);
             }
         }
     }

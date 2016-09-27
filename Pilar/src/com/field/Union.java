@@ -14,9 +14,9 @@ public class Union {
     private boolean isFull = false;
 
     public Union(UnionType unionType, Player player) {
-        bonus.setPlayer(player);
-        countryTypes = unionType.getCountries();
         bonus = BonusFactory.getBonus(unionType.getBonus());
+        countryTypes = unionType.getCountries();
+        bonus.setPlayer(player);
     }
 
     public void buyBonusLevel() {

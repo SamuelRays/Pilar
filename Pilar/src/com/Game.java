@@ -30,8 +30,10 @@ public class Game {
     public static final int DEFAULT_EVEN_MOVE_CHANCES = 0;
     public static final int DEFAULT_MOVE_CHANCES = 0;
     public static final Map<Integer, Long> BONUS_PRICES = new HashMap<>();
+
     private List<Field> gameField = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
+    private boolean isStarted = false;
 
     static {
         BONUS_PRICES.put(1, 100000L);
@@ -243,7 +245,15 @@ public class Game {
     public List<Field> getGameField() {
         return gameField;
     }
-    
+
+    public boolean isStarted() {
+        return isStarted;
+    }
+
+    public void setStarted(boolean started) {
+        isStarted = started;
+    }
+
     private boolean isDouble(int[] dice) {
         return dice[0] == dice[1];
     }

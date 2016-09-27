@@ -1,6 +1,7 @@
 package com.server;
 
 import com.Game;
+import com.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +13,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Server {
     private static Logger log = LoggerFactory.getLogger("ThreadedServer");
@@ -32,7 +35,7 @@ public class Server {
         while (true) {
             Socket socket = serverSocket.accept();
             log.info("Client connected: " + socket.getInetAddress().toString() + ":" + socket.getPort());
-            ClientHandler handler = new ClientHandler(this, socket, counter++);
+            ClientHandler handler = new ClientHandler(socket, counter++);
             handlers.add(handler);
             handler.start();
         }
@@ -40,16 +43,12 @@ public class Server {
 
 
     class ClientHandler extends Thread {
-
-        private Server server;
         private BufferedReader in;
         private PrintWriter out;
-
         private int number;
-        private String login;
+        private Player player;
 
-        public ClientHandler(Server server, Socket socket, int counter) throws Exception {
-            this.server = server;
+        public ClientHandler(Socket socket, int counter) throws Exception {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream());
             number = counter;
@@ -64,14 +63,25 @@ public class Server {
         @Override
         public void run() {
             try {
+                Pattern patternLogin = Pattern.compile("^login:.+");
                 String line = null;
                 while ((line = in.readLine()) != null) {
-                    //TODO
+                    Matcher matcherLogin = patternLogin.matcher(line);
+                    if (matcherLogin.matches()) {
+                        String name = line.substring(6).trim();
+                        player = new Player(name);
+                        game.addPlayer(player);
+                        log.info("New player registered. Name: {}", name);
+                        send("You connected to the game.\nYour nickname is " + name);
+                    } else {
+                        log.info("Unknown operation request.");
+                        send("Unknown operation request.\nChoose one of the followings:");
+                    }
                 }
             } catch (IOException e) {
                 log.error("Failed to read from socket", e);
             } finally {
-                log.info("Client disconnected: " + (login == null ? "Client #" + number : login));
+                log.info("Client disconnected: " + "Client #" + number);
                 handlers.remove(this);
                 Util.closeResource(in);
                 Util.closeResource(out);
