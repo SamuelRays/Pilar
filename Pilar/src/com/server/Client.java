@@ -23,8 +23,9 @@ public class Client {
             socket = new Socket(HOST, PORT);
             ConsoleThread console = new ConsoleThread(socket);
             console.start();
+            console.join();
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             log.error("Failed to read from socket", e);
         } finally {
             Util.closeResource(in);
@@ -48,7 +49,7 @@ public class Client {
                     //TODO
                     out.println(line);
                     out.flush();
-                    log.info("Player requests %s operation", line);
+                    log.info("Player requests {} operation", line);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
