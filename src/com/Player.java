@@ -1,23 +1,11 @@
 package com;
 
 import com.field.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Player {
-    private static final Logger log = LoggerFactory.getLogger(Player.class);
-
-    public static final int PORT = 19000;
-    public static final String HOST = "localhost";
-
     private Game game;
     private String name;
     private boolean isLost = false;
@@ -61,73 +49,8 @@ public class Player {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println("Enter your name.");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String name = null;
-        try {
-            while ((name = reader.readLine()).equals("")) {
-                System.out.println("Name must not be empty.\nTry again.");
-            }
-        } catch (IOException e) {
-            log.warn("IOException on entering player name.", e);
-        } catch (NullPointerException e) {
-            log.warn("NullPointerException on entering player name.", e);
-        } finally {
-            Util.closeResource(reader);
-        }
-        Player player = new Player(name);
-        player.startPlayer();
-    }
-
-    public void startPlayer() {
-        Socket socket = null;
-        BufferedReader in = null;
-        try {
-            socket = new Socket(HOST, PORT);
-            ConsoleThread console = new ConsoleThread(socket);
-            console.start();
-
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            Util.closeResource(in);
-            Util.closeResource(socket);
-        }
-    }
-
     public Player(String name) {
         this.name = name;
-    }
-
-    class ConsoleThread extends Thread {
-        BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter out;
-
-        public ConsoleThread(Socket socket) throws Exception {
-            out = new PrintWriter(socket.getOutputStream());
-        }
-
-        @Override
-        public void run() {
-            try {
-                String line;
-                while ((line = console.readLine()) != null) {
-                    //TODO
-                    out.println(line);
-                    out.flush();
-                    log.info("Player %s requested %s operation", this.getName(), line);
-                }
-            } catch (IOException e) {
-                log.warn("IOException in Player run method.", e);
-            } finally {
-                Util.closeResource(out);
-                Util.closeResource(console);
-            }
-        }
-
     }
 
     public void buyCountryField(CountryField field) {
