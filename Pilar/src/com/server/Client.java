@@ -34,10 +34,33 @@ public class Client {
         BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out;
         BufferedReader in;
+        Thread replyThread;
 
         public ConsoleThread(Socket socket) throws IOException {
             out = new PrintWriter(socket.getOutputStream());
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            replyThread = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        String line;
+                        while ((line = in.readLine()) != null) {
+                            StringBuilder answer = new StringBuilder(line);
+                            answer.append("\n");
+                            while (in.ready()) {
+                                answer.append(in.readLine());
+                                answer.append("\n");
+                            }
+                            log.info(answer.toString());
+                        }
+                    } catch (Exception e) {
+                        log.error("Failed to receive message from server.", e);
+                    } finally {
+                        Util.closeResource(in);
+                    }
+                }
+            };
+            replyThread.start();
         }
 
         @Override
@@ -47,16 +70,12 @@ public class Client {
                 while ((line = console.readLine()) != null) {
                     out.println(line);
                     out.flush();
-                    while (in.ready()) {
-                        System.out.println(in.readLine());
-                    }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("Failed to send message to server.", e);
             } finally {
                 Util.closeResource(console);
                 Util.closeResource(out);
-                Util.closeResource(in);
             }
         }
     }

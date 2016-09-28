@@ -24,20 +24,24 @@ public class Server {
     private Game game = new Game();
     private List<ClientHandler> handlers = new ArrayList<>();
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Server server = new Server();
         server.startServer();
     }
 
-    public void startServer() throws Exception {
+    public void startServer() {
         log.info("Starting server...");
-        ServerSocket serverSocket = new ServerSocket(PORT);
-        while (true) {
-            Socket socket = serverSocket.accept();
-            log.info("Client connected: " + socket.getInetAddress().toString() + ":" + socket.getPort());
-            ClientHandler handler = new ClientHandler(socket, counter++);
-            handlers.add(handler);
-            handler.start();
+        try {
+            ServerSocket serverSocket = new ServerSocket(PORT);
+            while (true) {
+                Socket socket = serverSocket.accept();
+                log.info("Client connected: " + socket.getInetAddress().toString() + ":" + socket.getPort());
+                ClientHandler handler = new ClientHandler(socket, counter++);
+                handlers.add(handler);
+                handler.start();
+            }
+        } catch (IOException e) {
+            log.error("Failed to create ServerSocket.", e);
         }
     }
 
@@ -48,10 +52,16 @@ public class Server {
         private int number;
         private Player player;
 
-        public ClientHandler(Socket socket, int counter) throws Exception {
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream());
-            number = counter;
+        public ClientHandler(Socket socket, int counter) {
+            try {
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                out = new PrintWriter(socket.getOutputStream());
+                number = counter;
+            } catch (IOException e) {
+                log.error("Failed to create ClientHandler object", e);
+                Util.closeResource(in);
+                Util.closeResource(out);
+            }
         }
 
 
@@ -64,15 +74,48 @@ public class Server {
         public void run() {
             try {
                 Pattern patternLogin = Pattern.compile("^login:.+");
-                String line = null;
-                while ((line = in.readLine()) != null) {
+                String line;
+                Outer: while ((line = in.readLine()) != null) {
                     Matcher matcherLogin = patternLogin.matcher(line);
                     if (matcherLogin.matches()) {
+                        if (player != null) {
+                            log.info("Repeated login attempt.");
+                            send("You have already logged in.");
+                            continue;
+                        }
                         String name = line.substring(6).trim();
+                        for (ClientHandler i : handlers) {
+                            if (i.player != null && name.equals(i.player.getName())) {
+                                log.info("Player with that name already exists.");
+                                send("Player with that name already exists.\nTry another one.");
+                                continue Outer;
+                            }
+                        }
                         player = new Player(name);
                         game.addPlayer(player);
                         log.info("New player registered. Name: {}", name);
-                        send("You connected to the game.\nYour nickname is " + name);
+                        send("Successful connection to the game.\nYour nickname is " + name);
+                    } else if (line.equals("help")) {
+                        //TODO;
+                    } else if (line.equals("start")) {
+                        if (player == null) {
+                            log.info("Non logged in client attempt.");
+                            send("Please, log in first.");
+                            continue;
+                        }
+                        if (handlers.size() < 2) {
+                            log.info("Single player attempt to start");
+                            send("You need more players to start.");
+                            continue;
+                        }
+                        for (ClientHandler i : handlers) {
+                            if (i.player == null) {
+                                log.info("Attempt to start with non logged in players.");
+                                send("Please wait for other players to log in.");
+                                continue Outer;
+                            }
+                        }
+
                     } else {
                         log.info("Unknown operation request.");
                         send("Unknown operation request.\nChoose one of the followings:");
