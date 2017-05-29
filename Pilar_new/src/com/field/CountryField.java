@@ -47,7 +47,11 @@ public class CountryField extends Field {
     }
 
     public void setOwner(Player owner) {
+        if (this.owner != null) {
+            this.owner.getCountryFields().remove(this);
+        }
         this.owner = owner;
+        union.checkOwner();
     }
 
     public Union getUnion() {

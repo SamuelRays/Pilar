@@ -1,5 +1,6 @@
 package com.field;
 
+import com.data.DataSource;
 import com.game.Player;
 
 import java.util.*;
@@ -13,7 +14,7 @@ public enum Union {
     WEST_EUROPE(12000, 1900, CountryField.NETHERLANDS, CountryField.DENMARK, CountryField.BELGIUM),
     NORTH_EUROPE(13000, 2000, CountryField.NORWAY, CountryField.SWEDEN, CountryField.FINLAND),
     WEST_ASIA(20000, 3500, CountryField.UAE, CountryField.KUWAIT, CountryField.QATAR),
-    SMALL(17000, 3000, CountryField.LUXEMBOURG, CountryField.VATICAN, CountryField.SINGAPORE, CountryField.MONACO),
+    SMALL_GIANTS(17000, 3000, CountryField.LUXEMBOURG, CountryField.VATICAN, CountryField.SINGAPORE, CountryField.MONACO),
     THREE_NATIONS_CUP(14000, 2100, CountryField.AUSTRALIA, CountryField.NEW_ZEALAND, CountryField.SOUTH_AFRICA);
 
     private Player owner;
@@ -48,15 +49,25 @@ public enum Union {
                 owner = null;
             }
         }
+        if (owner != null) {
+            owner.getUnions().remove(this);
+        }
         owner = checkPlayer;
+    }
+
+    public void levelUp() {
+        if (level == DataSource.BONUS_PRICES.size()) {
+            throw new RuntimeException("Maximal level reached already");
+        }
+        level++;
+    }
+
+    public void zeroLevel() {
+        level = 0;
     }
 
     public Player getOwner() {
         return owner;
-    }
-
-    public Set<CountryField> getCountries() {
-        return countries;
     }
 
     public int getPrice() {

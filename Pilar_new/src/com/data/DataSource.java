@@ -1,7 +1,7 @@
 package com.data;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataSource {
     public static final long START_MONEY_AMOUNT = 750000;
@@ -23,5 +23,16 @@ public class DataSource {
     public static final double DEFAULT_ONE_COUNTRY_BONUS_RATIO = 1;
     public static final int DEFAULT_EVEN_MOVE_CHANCES = 0;
     public static final int DEFAULT_MOVE_CHANCES = 0;
-    public static final Map<Integer, Long> BONUS_PRICES = new HashMap<>();
+    public static final int DEFAULT_CITIES_FOR_WONDER = 3;
+    public static final List<Long> BONUS_PRICES = new ArrayList<>();
+    public static final List<List<Integer>> CITY_BONUSES = new ArrayList<>();
+    public static final List<Integer> FAST_BUILD_BONUSES = new ArrayList<>();
+    public static final List<List<Integer>> FREE_CITY_BONUSES = new ArrayList<>();
+    public static final List<List<Integer>> MONEY_BONUSES = new ArrayList<>();
+    public static final List<Integer> THROWS_BONUSES = new ArrayList<>();
+    public static final List<List<Integer>> MOVE_CHANCE_BONUSES = new ArrayList<>();
+    public static final List<Double> ONE_COUNTRY_BONUSES = new ArrayList<>();
+    public static final List<Double> PAYMENT_BONUSES = new ArrayList<>();
+    public static final List<Double> PROFIT_BONUSES = new ArrayList<>();
+    public static final List<Double> WONDER_BONUSES = new ArrayList<>();
 }
