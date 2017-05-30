@@ -51,6 +51,7 @@ public class CountryField extends Field {
             this.owner.getCountryFields().remove(this);
         }
         this.owner = owner;
+        owner.getCountryFields().add(this);
         union.checkOwner();
     }
 
