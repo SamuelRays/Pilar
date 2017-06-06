@@ -20,8 +20,8 @@ public class Player {
     private double paymentRatio = DataSource.PAYMENT_BONUSES.get(0);
     private int citiesPerTurnAvailable = DataSource.FAST_BUILD_BONUSES.get(0);
     private int availableThrows = DataSource.THROWS_BONUSES.get(0);
-    private int currentAvailableThrows = availableThrows;
-    private List<Long> payments = DataSource.MONEY_BONUSES.get(0);
+    private int availableThrowsLeft = availableThrows;
+    private List<Long> awards = DataSource.MONEY_BONUSES.get(0);
     private List<Integer> citiesForWonder = DataSource.WONDER_BONUSES.get(0);
     private List<Double> profits = DataSource.PROFIT_BONUSES.get(0);
     private List<Integer> profitMoves = DataSource.DEFAULT_PROFIT_MOVES;
@@ -37,6 +37,33 @@ public class Player {
             money += value;
             return true;
         }
+    }
+
+    public void getAWage() {
+        changeMoneyAmount(awards.get(0));
+    }
+
+    public void getBonusMoney() {
+        changeMoneyAmount(awards.get(1));
+    }
+
+    public void payTax() {
+        changeMoneyAmount(awards.get(2));
+    }
+
+    public void profitUpUpdate() {
+        int moves = profitMovesLeft.get(0);
+        profitMovesLeft.set(0, moves + profitMoves.get(0));
+    }
+
+    public void profitDownUpdate() {
+        int moves = profitMovesLeft.get(1);
+        profitMovesLeft.set(1, moves + profitMoves.get(1));
+    }
+
+    public void ultraProfitUpdate() {
+        int moves = profitMovesLeft.get(2);
+        profitMovesLeft.set(2, moves + profitMoves.get(2));
     }
 
     public void bonusLevelUp(Union union) {
@@ -57,7 +84,7 @@ public class Player {
             } else if (union.equals(Union.I_AINT_GO_THERE)) {
                 availableThrows = DataSource.THROWS_BONUSES.get(level);
             } else if (union.equals(Union.SHOW_ME_THE_MONEY)) {
-                payments = DataSource.MONEY_BONUSES.get(level);
+                awards = DataSource.MONEY_BONUSES.get(level);
             } else if (union.equals(Union.WONDERFUL_LIFE)) {
                 citiesForWonder = DataSource.WONDER_BONUSES.get(level);
             } else if (union.equals(Union.ULTIMATE_PROFIT)) {
@@ -110,12 +137,22 @@ public class Player {
         return availableThrows;
     }
 
-    public int getCurrentAvailableThrows() {
-        return currentAvailableThrows;
+    public int getAvailableThrowsLeft() {
+        return availableThrowsLeft;
     }
 
-    public List<Long> getPayments() {
-        return payments;
+    public boolean reduceAvailableThrows() {
+        if (availableThrowsLeft == 0) {
+            availableThrowsLeft = availableThrows;
+            return false;
+        } else {
+            availableThrowsLeft--;
+            return true;
+        }
+    }
+
+    public List<Long> getAwards() {
+        return awards;
     }
 
     public List<Integer> getCitiesForWonder() {

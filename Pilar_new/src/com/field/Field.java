@@ -2,9 +2,12 @@ package com.field;
 
 import com.game.Player;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class Field {
     private String name;
-    private Player currentPlayer;
+    private Set<Player> currentPlayers = new HashSet<>();
 
     protected Field(String name) {
         this.name = name;
@@ -14,11 +17,19 @@ public abstract class Field {
         return name;
     }
 
-    public Player getCurrentPlayer() {
-        return currentPlayer;
+    public Set<Player> getCurrentPlayers() {
+        return currentPlayers;
     }
 
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    public void setCurrentPlayer(Player player) {
+        currentPlayers.add(player);
+    }
+
+    public void removeCurrentPlayer(Player player) {
+        currentPlayers.remove(player);
+    }
+
+    public void clearField() {
+        currentPlayers.clear();
     }
 }

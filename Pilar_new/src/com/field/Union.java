@@ -60,6 +60,9 @@ public enum Union {
         if (level == DataSource.BONUS_PRICES.size()) {
             throw new RuntimeException("Maximal level reached already");
         }
+        if (!owner.changeMoneyAmount(DataSource.BONUS_PRICES.get(level))) {
+            throw new RuntimeException("Not enough money");
+        }
         level++;
         owner.bonusLevelUp(this);
     }
